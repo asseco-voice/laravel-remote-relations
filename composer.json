@@ -23,6 +23,8 @@
     },
     "extra": {
         "laravel": {
-        }
+            "providers": [
+                "Voice\\ExternalRelations\\ExternalRelationsServiceProvider"
+            ]}
     }
 }

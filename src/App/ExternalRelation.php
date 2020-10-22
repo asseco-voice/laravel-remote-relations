@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Relation extends Model
+class ExternalRelation extends Model
 {
     protected $guarded = ['id'];
     use HasFactory;
@@ -15,4 +15,5 @@ class Relation extends Model
     {
         return $this->morphTo();
     }
+
 }

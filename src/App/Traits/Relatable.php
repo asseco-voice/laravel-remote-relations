@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Voice\ExternalRelations\App\Traits;
 
-use Voice\ExternalRelations\App\RelationServiceResolver;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Voice\ExternalRelations\Relation;
+use Voice\ExternalRelations\App\Relation;
+use Illuminate\Database\Eloquent\Collection;
+use Voice\ExternalRelations\App\RelationServiceResolver;
 
 trait Relatable
 {
@@ -25,11 +26,33 @@ trait Relatable
         ]);
     }
 
-    public function resolveRelations(): array
+
+    public function resolve(): array
     {
-        if(empty($this->relations["relations"])){
-            return [];
+        $resolved = [];
+
+        $resolvers = config("asseco-external-relations.resolvers");
+
+        $sortedRelations = [];
+
+        foreach ($this->relations()->getResults() as $relation) {
+            if (isset($resolvers[$relation->relation_type])) {
+                $sortedRelations[$relation->relation_type][] = $relation;
+            }
         }
-        return RelationServiceResolver::resolveRelations($this->relations["relations"]);
+
+        foreach ($sortedRelations as $type => $relations) {
+            $resolver = RelationServiceResolver::getResolver($type);
+
+            if (count($relations) > 1){
+                $resolved = array_merge($resolved, $resolver->handleMany(new Collection($relations)));
+            }else{
+                $resolved = array_merge($resolved, $resolver->handleOne($relations[0]));
+            }
+
+            
+        }
+
+        return $resolved;
     }
 }
