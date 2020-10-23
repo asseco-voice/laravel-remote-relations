@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Voice\ExternalRelations\App\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Voice\ExternalRelations\App\Relation;
 use Illuminate\Database\Eloquent\Collection;
+use Voice\ExternalRelations\App\ExternalRelation;
 use Voice\ExternalRelations\App\RelationServiceResolver;
 
 trait Relatable
 {
     public function relations(): MorphMany
     {
-        return $this->morphMany(Relation::class, 'relatable');
+        return $this->morphMany(ExternalRelation::class, 'relatable');
     }
 
     public function relate(string $service, string $model, string $id, string $type = "internal")
