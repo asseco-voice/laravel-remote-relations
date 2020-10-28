@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Voice\ExternalRelations;
+namespace Voice\RemoteRelations;
 
 use Illuminate\Support\ServiceProvider;
 
-class ExternalRelationsServiceProvider extends ServiceProvider
+class RemoteRelationsServiceProvider extends ServiceProvider
 {
     /**
      * Register the application services.
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/asseco-external-relations.php', 'asseco-external-relations');
+        $this->mergeConfigFrom(__DIR__ . '/../config/asseco-remote-relations.php', 'asseco-remote-relations');
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
     }
 
@@ -22,6 +22,6 @@ class ExternalRelationsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->publishes([__DIR__ . '/../config/asseco-external-relations.php' => config_path('asseco-external-relations.php')]);
+        $this->publishes([__DIR__ . '/../config/asseco-remote-relations.php' => config_path('asseco-remote-relations.php')]);
     }
 }

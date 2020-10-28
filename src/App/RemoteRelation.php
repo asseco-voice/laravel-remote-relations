@@ -1,19 +1,21 @@
 <?php
 
-namespace Voice\ExternalRelations\App;
+declare(strict_types=1);
+
+namespace Voice\RemoteRelations\App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class ExternalRelation extends Model
+class RemoteRelation extends Model
 {
-    protected $guarded = ['id'];
     use HasFactory;
 
-    public function relatable(): MorphTo
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function model(): MorphTo
     {
         return $this->morphTo();
     }
-
 }

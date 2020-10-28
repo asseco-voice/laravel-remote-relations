@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExternalRelationsTable extends Migration
+class CreateRemoteRelationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateExternalRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('external_relations', function (Blueprint $table) {
+        Schema::create('remote_relations', function (Blueprint $table) {
             $table->id();
-            $table->morphs("relatable");
-            $table->string("service");
-
-            //temp internal and external
-            $table->string("relation_type");
-
-            $table->string("model");
-            $table->string("model_id");
+            $table->morphs('model');
+            $table->string('service');
+            $table->string('remote_model');
+            $table->string('remote_model_id');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ class CreateExternalRelationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('external_relations');
+        Schema::dropIfExists('remote_relations');
     }
 }

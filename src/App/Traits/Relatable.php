@@ -2,57 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Voice\ExternalRelations\App\Traits;
+namespace Voice\RemoteRelations\App\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Collection;
-use Voice\ExternalRelations\App\ExternalRelation;
-use Voice\ExternalRelations\App\RelationServiceResolver;
+use Voice\RemoteRelations\App\RemoteRelation;
+use Voice\RemoteRelations\RelationsResolver;
 
 trait Relatable
 {
-    public function relations(): MorphMany
+    public function remoteRelations(): MorphMany
     {
-        return $this->morphMany(ExternalRelation::class, 'relatable');
+        return $this->morphMany(RemoteRelation::class, 'model');
     }
 
-    public function relate(string $service, string $model, string $id, string $type = "internal")
+    public function relate(string $service, string $model, string $id)
     {
         $this->relations()->create([
-            "service" => $service,
-            "model" => $model,
-            "model_id" => $id,
-            "relation_type" => $type
+            'model_type'      => get_class($this),
+            'model_id'        => $this->id,
+            'service'         => $service,
+            'remote_model'    => $model,
+            'remote_model_id' => $id,
         ]);
     }
 
-
-    public function resolve(): array
+    public function resolveRemoteRelations(): array
     {
-        $resolved = [];
-
-        $resolvers = config("asseco-external-relations.resolvers");
-
-        $sortedRelations = [];
-
-        foreach ($this->relations()->getResults() as $relation) {
-            if (isset($resolvers[$relation->relation_type])) {
-                $sortedRelations[$relation->relation_type][] = $relation;
-            }
-        }
-
-        foreach ($sortedRelations as $type => $relations) {
-            $resolver = RelationServiceResolver::getResolver($type);
-
-            if (count($relations) > 1){
-                $resolved = array_merge($resolved, $resolver->handleMany(new Collection($relations)));
-            }else{
-                $resolved = array_merge($resolved, $resolver->handleOne($relations[0]));
-            }
-
-            
-        }
-
-        return $resolved;
+        return (new RelationsResolver())->resolve($this->remoteRelations);
     }
 }
