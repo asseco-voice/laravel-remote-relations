@@ -25,11 +25,9 @@ class RelationsResolver
         $resolved = [];
 
         foreach ($relationsByService as $serviceClass => $relationsByModel) {
-
             $service = $this->instantiateService($serviceClass);
 
             foreach ($relationsByModel as $model => $relationCollection) {
-
                 $resolved = array_merge($resolved, $service->resolve($model, $relationCollection));
             }
         }
