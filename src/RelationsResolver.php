@@ -20,7 +20,7 @@ class RelationsResolver
 
     public function resolve(Collection $relations): array
     {
-        $relationsByService = $relations->groupBy(['service', 'model']);
+        $relationsByService = $relations->groupBy(['service', 'remote_model']);
 
         $resolved = [];
 
@@ -37,10 +37,10 @@ class RelationsResolver
 
     protected function instantiateService(string $serviceClass): RemoteService
     {
-        if (!in_array($serviceClass, $this->services)) {
+        if (!array_key_exists($serviceClass, $this->services)) {
             throw new Exception("Service '$serviceClass' is not registered");
         }
 
-        return new $serviceClass;
+        return new $this->services[$serviceClass];
     }
 }
