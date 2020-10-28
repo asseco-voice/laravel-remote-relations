@@ -8,5 +8,5 @@ use Illuminate\Support\Collection;
 
 interface RemoteService
 {
-    public function resolve(string $model, Collection $relations): array;
+    public function resolve(string $remoteModel, Collection $relations): array;
 }

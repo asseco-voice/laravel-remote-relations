@@ -2,175 +2,48 @@
 
 # Laravel remote relations
 
-This package exposes a ``search`` method on Laravel Eloquent models
-providing a detailed DB search with JSON as input parameter. 
-
-It functions out-of-the-box automatically for all Eloquent models 
-within the project. No additional setup is needed.
+This package enables creating relations locally from Eloquent models to remote services. 
 
 ## Installation
 
 Install the package through composer. It is automatically registered
 as a Laravel service provider, so no additional actions are required.
 
-``composer require asseco-voice/laravel-json-search``
+``composer require asseco-voice/laravel-remote-relations``
 
 ## Usage
 
-Package provides few endpoints out of the box:
+Run ``php artisan migrate`` to migrate the table. 
 
-- [POST](#post) ``/api/search/{model}`` - for search 
-- [PUT](#put) ``/api/search/{model}/update`` - for mass update by query results
-- [DELETE](#delete) ``/api/search/{model}`` - for mass delete by query results
+Table consists of:
 
-Model should be provided in standard Laravel notation (lowercase plural) in order
-to map it automatically (i.e. `/api/search/contacts` in order to search `Contact` model).
+1. Local model type/id - polymorphic relation of local Eloquent models
+1. Service - indicating a key which needs to be mapped to a certain service class
+1. Remote model - plain string representing a model in a remote service (isn't Laravel
+specific)
+1. Remote model ID - actual ID to which a relation is created 
 
-By default, ``App`` namespace is used, but you can change the defaults or add additional
-endpoints if you have need for that in the [package configuration](#configuration) by adding
-additional values to ``models_namespaces`` array. 
+Out of the box no services are registered because the package doesn't know
+where to fetch related data from, so you need to provide services manually. 
 
-Following are some examples, however there is **much more** to the search package than 
-just filtering by attributes. 
+1. Publish the configuration:
 
-**For detailed engine usage and logic, refer to 
-[this readme](https://github.com/asseco-voice/laravel-json-query-builder).**
+    ```
+    php artisan vendor:publish --provider="Voice\RemoteRelations\RemoteRelationsServiceProvider"
+    ```
 
-## Examples 
+1. Create a new service class for remote service you'd like to make a relation to and
+make it extend ``RemoteService`` interface
 
-### POST
+1. Interface has a single method which is responsible for resolving a collection of
+relations. It has 2 parameters. First parameter is remote model string, and second is
+relation collection.
 
-Call the endpoint providing the following JSON:
+1. Package will behind the scenes group relations by service and model, so that when
+resolve method is hit, you can be sure that you are getting a collection only for that 
+service and for a same set of models.
 
-```
-{
-    "search": {
-        "first_name": "=foo;bar;!baz",
-        "last_name": "=test"
-    }
-}
-```
-    
-This will perform a ``SELECT * FROM some_table WHERE first_name IN ('foo, 'bar') 
-AND first_name not in ('baz') or last_name in ('test')``.
+1. You can then proceed with resolving IDs either at once, or doing a request to 
+remote service multiple times, depending on what the API supports.
 
-### PUT
-
-Call the endpoint providing the following JSON:
-
-```
-{
-    "search": {
-        "first_name": "=foo;bar;!baz",
-        "last_name": "=test"
-    },
-    "update": {
-        "first_name": "new name"
-    }
-}
-```
-    
-This will perform a ``SELECT * FROM some_table WHERE first_name IN ('foo, 'bar') 
-AND first_name not in ('baz') or last_name in ('test')``, and on the given result
-set it will perform a mass update giving a ``new name`` to every record retrieved
-
-### DELETE
-
-```
-{
-    "search": {
-        "first_name": "=foo;bar;!baz",
-        "last_name": "=test"
-    }
-}
-```
-    
-This will perform a ``DELETE FROM some_table WHERE first_name IN ('foo, 'bar') 
-AND first_name not in ('baz') or last_name in ('test')`` doing a mass delete
-by given parameters.
-
-## Custom endpoints
-
-It is possible to create a custom endpoint if the current setup does not suit you.
-
-### Search 
-
-- Add route:
-
-```
-Route::post('search', 'ExampleController@search');
-```
-
-- Call the method within the controller and provide it with input parameters from JSON body.
-
-```
-public function search(Request $request)
-{
-    return SomeModel::search($request->all())->get();
-}
-```
-
-### Update
-
-- Add route:
-
-```
-Route::put('search/update', 'ExampleController@search');
-```
-
-- Call the method within the controller and provide it with input parameters from JSON body.
-
-```
-public function search(Request $request)
-{
-    $search = SomeModel::search($request->except('update'));
-
-    if (!$request->has('update')) {
-        throw new Exception('Missing update parameters');
-    }
-
-    $search->update($request->update);
-
-    return $search->get();
-}
-```
-
-### Delete
-
-- Add route:
-
-```
-Route::delete('search', 'ExampleController@search');
-```
-
-- Call the method within the controller and provide it with input parameters from JSON body.
-
-```
-public function search(Request $request)
-{
-    return SomeModel::search($request->all())->delete();
-}
-```
-
-## Search favorites
-
-By default, favorites are disabled. To enable them, set the ``SEARCH_FAVORITES_ENABLED`` 
-in your `.env` file to `true`.
-
-Favorites enable you to save searches for a specific user, so after you enable them through
-``.env`` you need to run `php artisan migrate`, and routes for favorites will be exposed 
-automatically. 
-
-## Debugging
-
-If you'd like to see query called instead of a result, uncomment ``dump`` line
-within ``Voice\JsonSearch\SearchServiceProvider``. 
-
-Due to Laravel query builder inner workings, this will not dump the resulting query for relations. For that purpose
-I'd recommend using Laravel query log. 
-
-## Configuration
-
-Publish and override the configuration for the package:
-
-    php artisan vendor:publish --provider="Voice\JsonSearch\SearchServiceProvider"
+1. Model IDs are of ``string`` type so that it supports non-numeric IDs as well.
