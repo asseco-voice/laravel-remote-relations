@@ -18,8 +18,6 @@ trait Relatable
     public function relate(string $service, string $model, string $id)
     {
         $this->remoteRelations()->create([
-            'model_type'      => get_class($this),
-            'model_id'        => $this->id,
             'service'         => $service,
             'remote_model'    => $model,
             'remote_model_id' => $id,
