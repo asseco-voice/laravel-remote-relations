@@ -1,5 +1,7 @@
 <?php
 
+use Voice\RemoteRelations\App\RemoteRelation;
+
 return [
 
     /**
@@ -9,4 +11,9 @@ return [
     'services' => [
         // 'some_service' => SomeService::class,
     ],
+
+    /**
+     * If needed, extend the class with additional features and replace with your own class
+     */
+    'remote_relation_class' => RemoteRelation::class,
 ];
