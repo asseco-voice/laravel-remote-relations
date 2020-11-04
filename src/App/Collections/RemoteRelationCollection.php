@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Voice\RemoteRelations\App\Collections;
 
 use Illuminate\Database\Eloquent\Collection;
