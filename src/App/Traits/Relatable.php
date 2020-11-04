@@ -6,7 +6,6 @@ namespace Voice\RemoteRelations\App\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Voice\RemoteRelations\App\RemoteRelation;
-use Voice\RemoteRelations\RelationsResolver;
 
 trait Relatable
 {
@@ -23,9 +22,4 @@ trait Relatable
             'remote_model_id' => $id,
         ]);
     }
-//
-//    public function resolveRemoteRelations(): array
-//    {
-//        return (new RelationsResolver())->resolve($this->remoteRelations);
-//    }
 }
