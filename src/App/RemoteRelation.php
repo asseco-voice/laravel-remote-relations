@@ -7,6 +7,8 @@ namespace Voice\RemoteRelations\App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Voice\RemoteRelations\App\Collections\RemoteRelationCollection;
+use Voice\RemoteRelations\RelationsResolver;
 
 class RemoteRelation extends Model
 {
@@ -17,5 +19,17 @@ class RemoteRelation extends Model
     public function model(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function resolve()
+    {
+        $resolvedRelation = (new RelationsResolver())->resolveRelation($this);
+
+        return array_merge($this->toArray(), ['data' => $resolvedRelation]);
+    }
+
+    public function newCollection(array $models = [])
+    {
+        return new RemoteRelationCollection($models);
     }
 }

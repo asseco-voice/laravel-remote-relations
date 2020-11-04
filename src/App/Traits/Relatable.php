@@ -23,9 +23,9 @@ trait Relatable
             'remote_model_id' => $id,
         ]);
     }
-
-    public function resolveRemoteRelations(): array
-    {
-        return (new RelationsResolver())->resolve($this->remoteRelations);
-    }
+//
+//    public function resolveRemoteRelations(): array
+//    {
+//        return (new RelationsResolver())->resolve($this->remoteRelations);
+//    }
 }
