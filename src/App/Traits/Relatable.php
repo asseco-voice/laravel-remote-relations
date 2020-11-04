@@ -23,6 +23,7 @@ trait Relatable
             'remote_model_id' => $id,
         ]);
     }
+
 //
 //    public function resolveRemoteRelations(): array
 //    {

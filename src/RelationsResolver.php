@@ -34,7 +34,7 @@ class RelationsResolver
     }
 
     /**
-     * Efficiently resolve relation collection grouping it by service/model
+     * Efficiently resolve relation collection grouping it by service/model.
      *
      * @param Collection $relations
      * @return array
