@@ -17,7 +17,25 @@ trait Relatable
 
     public function relate(string $service, string $model, string $id): Model
     {
-        return $this->remoteRelations()->create([
+        $relation = $this->createRelation($service, $model, $id);
+        $relation->save();
+        $relation->refresh();
+
+        return $relation;
+    }
+
+    public function relateQuietly(string $service, string $model, string $id): Model
+    {
+        $relation = $this->createRelation($service, $model, $id);
+        $relation->saveQuietly();
+        $relation->refresh();
+
+        return $relation;
+    }
+
+    protected function createRelation(string $service, string $model, string $id): Model
+    {
+        return $this->remoteRelations()->make([
             'service'         => $service,
             'remote_model'    => $model,
             'remote_model_id' => $id,

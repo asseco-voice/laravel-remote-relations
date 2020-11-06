@@ -47,10 +47,14 @@ of users) on a single service so that you can resolve multiple models at once if
 
 ## Usage
 
-You can have your models use a ``Relatable`` trait which will provide an Eloquent relation to 
+Have your models use a ``Relatable`` trait which will provide an Eloquent relation to 
 a `RemoteRelation` class, so you don't have to repeat yourself. 
 
-There is also a handy ``relate($service, $model, $id)`` method to create a relation. 
+There are also two handy methods:
+
+- ``relate($service, $model, $id)`` - to create a relation
+- ``relateQuietly($service, $model, $id)`` - to create a relation suppressing all events which 
+would usually be fired by creation of the relation. 
 
 ### Example
 
