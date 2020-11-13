@@ -10,7 +10,6 @@ use Voice\RemoteRelations\App\RemoteRelation;
 
 class ResolvedRemoteRelationController extends Controller
 {
-
     public function show(RemoteRelation $remoteRelation)
     {
         return Response::json($remoteRelation->resolve()[RemoteRelation::DATA_KEY]);

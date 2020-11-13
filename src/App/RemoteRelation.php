@@ -14,7 +14,7 @@ class RemoteRelation extends Model
 {
     use HasFactory;
 
-    const DATA_KEY = "data";
+    const DATA_KEY = 'data';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 

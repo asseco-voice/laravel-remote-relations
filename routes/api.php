@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Voice\RemoteRelations\App\Http\Controllers\RemoteRelationController;
 use Voice\RemoteRelations\App\Http\Controllers\ResolvedRemoteRelationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +18,6 @@ use Voice\RemoteRelations\App\Http\Controllers\ResolvedRemoteRelationController;
 Route::prefix('api')
     ->middleware('api')
     ->group(function () {
-        Route::get("relations/{remoteRelation}", [RemoteRelationController::class, "show"]);
-        Route::get("relations/{remoteRelation}/resolved", [ResolvedRemoteRelationController::class, "show"]);
+        Route::get('relations/{remoteRelation}', [RemoteRelationController::class, 'show']);
+        Route::get('relations/{remoteRelation}/resolved', [ResolvedRemoteRelationController::class, 'show']);
     });
