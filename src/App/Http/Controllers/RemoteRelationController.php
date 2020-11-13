@@ -10,7 +10,8 @@ use Voice\RemoteRelations\App\RemoteRelation;
 
 class RemoteRelationController extends Controller
 {
-    public function show(RemoteRelation $remoteRelation){
-        return Response::json($remoteRelation);        
+    public function show(RemoteRelation $remoteRelation)
+    {
+        return Response::json($remoteRelation);
     }
 }
