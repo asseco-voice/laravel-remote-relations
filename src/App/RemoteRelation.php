@@ -14,6 +14,8 @@ class RemoteRelation extends Model
 {
     use HasFactory;
 
+    const DATA_KEY = "data";
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function model(): MorphTo
@@ -25,7 +27,7 @@ class RemoteRelation extends Model
     {
         $resolvedRelation = (new RelationsResolver())->resolveRelation($this);
 
-        return array_merge($this->toArray(), ['data' => $resolvedRelation]);
+        return array_merge($this->toArray(), [self::DATA_KEY => $resolvedRelation]);
     }
 
     public function newCollection(array $models = [])

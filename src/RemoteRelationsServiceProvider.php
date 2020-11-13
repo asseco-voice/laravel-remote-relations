@@ -15,6 +15,7 @@ class RemoteRelationsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/asseco-remote-relations.php', 'asseco-remote-relations');
         $this->loadMigrationsFrom(__DIR__ . '/../migrations');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
     }
 
     /**
