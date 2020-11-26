@@ -14,7 +14,6 @@ class RemoteRelationsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/asseco-remote-relations.php', 'asseco-remote-relations');
-        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
     }
 
@@ -23,6 +22,14 @@ class RemoteRelationsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->publishes([__DIR__ . '/../config/asseco-remote-relations.php' => config_path('asseco-remote-relations.php')]);
+        $timestamp = now()->format('Y_m_d_His');
+
+        $this->publishes([
+            __DIR__ . config('asseco-remote-relations.stub_path') => database_path("migrations/{$timestamp}_create_remote_relations_table.php")
+        ], 'asseco-remote-relations-migrations');
+
+        $this->publishes([
+            __DIR__ . '/../config/asseco-remote-relations.php' => config_path('asseco-remote-relations.php')
+        ], 'asseco-remote-relations-config');
     }
 }
