@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Voice\RemoteRelations;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Config;
 use Voice\RemoteRelations\App\Contracts\HasRemoteRelations;
 use Voice\RemoteRelations\App\Exceptions\RemoteRelationException;
 use Voice\RemoteRelations\App\RemoteRelation;
@@ -16,7 +15,7 @@ class RelationsResolver
 
     public function __construct()
     {
-        $this->services = Config::get('asseco-remote-relations.services');
+        $this->services = config('asseco-remote-relations.services');
     }
 
     /**
