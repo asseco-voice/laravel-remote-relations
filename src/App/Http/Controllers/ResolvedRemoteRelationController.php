@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Voice\RemoteRelations\App\Http\Controllers;
+namespace Asseco\RemoteRelations\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Voice\RemoteRelations\App\RemoteRelation;
+use Asseco\RemoteRelations\App\RemoteRelation;
 
 class ResolvedRemoteRelationController extends Controller
 {

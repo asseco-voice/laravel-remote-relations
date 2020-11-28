@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Voice\RemoteRelations\App\Traits;
+namespace Asseco\RemoteRelations\App\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;

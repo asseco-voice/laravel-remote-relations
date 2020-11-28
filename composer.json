@@ -13,13 +13,13 @@
   },
   "autoload": {
     "psr-4": {
-      "Voice\\RemoteRelations\\": "src/"
+      "Asseco\\RemoteRelations\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Voice\\RemoteRelations\\RemoteRelationsServiceProvider"
+        "Asseco\\RemoteRelations\\RemoteRelationsServiceProvider"
       ]
     }
   }

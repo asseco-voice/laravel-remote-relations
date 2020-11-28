@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Voice\RemoteRelations\App;
+namespace Asseco\RemoteRelations\App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Voice\RemoteRelations\App\Collections\RemoteRelationCollection;
-use Voice\RemoteRelations\RelationsResolver;
+use Asseco\RemoteRelations\App\Collections\RemoteRelationCollection;
+use Asseco\RemoteRelations\RelationsResolver;
 
 class RemoteRelation extends Model
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Voice\RemoteRelations\App\Exceptions;
+namespace Asseco\RemoteRelations\App\Exceptions;
 
 use Exception;
 use Throwable;

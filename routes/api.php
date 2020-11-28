@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Voice\RemoteRelations\App\Http\Controllers\RemoteRelationController;
-use Voice\RemoteRelations\App\Http\Controllers\ResolvedRemoteRelationController;
+use Asseco\RemoteRelations\App\Http\Controllers\RemoteRelationController;
+use Asseco\RemoteRelations\App\Http\Controllers\ResolvedRemoteRelationController;
 
 /*
 |--------------------------------------------------------------------------

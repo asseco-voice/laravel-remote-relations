@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Voice\RemoteRelations;
+namespace Asseco\RemoteRelations;
 
 use Illuminate\Support\ServiceProvider;
 

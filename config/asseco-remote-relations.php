@@ -1,6 +1,6 @@
 <?php
 
-use Voice\RemoteRelations\App\RemoteRelation;
+use Asseco\RemoteRelations\App\RemoteRelation;
 
 return [
 

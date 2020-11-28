@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Voice\RemoteRelations\App\Contracts;
+namespace Asseco\RemoteRelations\App\Contracts;
 
 use Illuminate\Support\Collection;
-use Voice\RemoteRelations\App\RemoteRelation;
+use Asseco\RemoteRelations\App\RemoteRelation;
 
 interface HasRemoteRelations
 {
