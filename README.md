@@ -13,7 +13,8 @@ as a Laravel service provider, so no additional actions are required.
 
 ## Setup
 
-Run ``php artisan migrate`` to migrate the table. 
+1. Publish the migrations with ``php artisan vendor:publish --tag=asseco-remote-relations-migrations``
+1. Run ``php artisan migrate`` to migrate the table. 
 
 Table consists of:
 
@@ -26,23 +27,14 @@ specific)
 Out of the box no services are registered because the package doesn't know
 where to fetch related data from, so you need to provide services manually. 
 
-1. Publish the configuration:
-
-    ```
-    php artisan vendor:publish --provider="Voice\RemoteRelations\RemoteRelationsServiceProvider"
-    ```
-
+1. Publish the configuration with `php artisan vendor:publish --tag=asseco-remote-relations-config`
 1. Create a new service class for remote service you'd like to make a relation to and
 make it extend ``HasRemoteRelations`` interface
-
 1. Interface has 2 methods which are responsible for resolving a single relation or a
 collection of relations. 
-
 1. Resolving collections will always be done on a single model type (i.e. collection
 of users) on a single service so that you can resolve multiple models at once if possible. 
-
 1. Model IDs are of ``string`` type so that it supports non-numeric IDs as well.
-
 1. Add the class to config under ``services`` key in the format `'service_name' => Service::class'`
 
 ## Usage

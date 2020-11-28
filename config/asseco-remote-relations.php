@@ -16,4 +16,9 @@ return [
      * If needed, extend the class with additional features and replace with your own class.
      */
     'remote_relation_class' => RemoteRelation::class,
+
+    /**
+     * Path to original stub which will create the migration upon publishing.
+     */
+    'stub_path' => '/../migrations/create_remote_relations_table.php.stub',
 ];

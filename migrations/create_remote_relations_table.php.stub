@@ -19,6 +19,7 @@ class CreateRemoteRelationsTable extends Migration
             $table->string('service');
             $table->string('remote_model');
             $table->string('remote_model_id');
+            $table->unique(['model', 'service', 'remote_model', 'remote_model_id']);
             $table->timestamps();
         });
     }

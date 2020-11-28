@@ -6,13 +6,12 @@ namespace Voice\RemoteRelations\App\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Support\Facades\Config;
 
 trait Relatable
 {
     public function remoteRelations(): MorphMany
     {
-        return $this->morphMany(Config::get('asseco-remote-relations.remote_relation_class'), 'model');
+        return $this->morphMany(config('asseco-remote-relations.remote_relation_class'), 'model');
     }
 
     public function relate(string $service, string $model, string $id): Model
@@ -40,5 +39,30 @@ trait Relatable
             'remote_model'    => $model,
             'remote_model_id' => $id,
         ]);
+    }
+
+    public function unrelate(string $service, string $model, string $id): void
+    {
+        $relation = $this->relationByServiceModelId($service, $model, $id);
+
+        $relation->delete();
+    }
+
+    public function unrelateQuietly(string $service, string $model, string $id): void
+    {
+        $relation = $this->relationByServiceModelId($service, $model, $id);
+
+        static::withoutEvents(function () use ($relation) {
+            return $relation->delete();
+        });
+    }
+
+    protected function relationByServiceModelId(string $service, string $model, string $id)
+    {
+        return $this->remoteRelations()
+            ->where('service', $service)
+            ->where('remote_model', $model)
+            ->where('remote_model_id', $id)
+            ->firstOrFail();
     }
 }
