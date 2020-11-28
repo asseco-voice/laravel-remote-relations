@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations\App\Collections;
 
-use Illuminate\Database\Eloquent\Collection;
 use Asseco\RemoteRelations\RelationsResolver;
+use Illuminate\Database\Eloquent\Collection;
 
 class RemoteRelationCollection extends Collection
 {

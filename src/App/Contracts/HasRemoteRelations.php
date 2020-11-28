@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations\App\Contracts;
 
-use Illuminate\Support\Collection;
 use Asseco\RemoteRelations\App\RemoteRelation;
+use Illuminate\Support\Collection;
 
 interface HasRemoteRelations
 {

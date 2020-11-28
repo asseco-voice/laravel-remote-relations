@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations;
 
-use Illuminate\Database\Eloquent\Collection;
 use Asseco\RemoteRelations\App\Contracts\HasRemoteRelations;
 use Asseco\RemoteRelations\App\Exceptions\RemoteRelationException;
 use Asseco\RemoteRelations\App\RemoteRelation;
+use Illuminate\Database\Eloquent\Collection;
 
 class RelationsResolver
 {
