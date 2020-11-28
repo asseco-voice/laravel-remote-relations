@@ -25,11 +25,11 @@ class RemoteRelationsServiceProvider extends ServiceProvider
         $timestamp = now()->format('Y_m_d_His');
 
         $this->publishes([
-            __DIR__ . config('asseco-remote-relations.stub_path') => database_path("migrations/{$timestamp}_create_remote_relations_table.php")
+            __DIR__ . config('asseco-remote-relations.stub_path') => database_path("migrations/{$timestamp}_create_remote_relations_table.php"),
         ], 'asseco-remote-relations-migrations');
 
         $this->publishes([
-            __DIR__ . '/../config/asseco-remote-relations.php' => config_path('asseco-remote-relations.php')
+            __DIR__ . '/../config/asseco-remote-relations.php' => config_path('asseco-remote-relations.php'),
         ], 'asseco-remote-relations-config');
     }
 }

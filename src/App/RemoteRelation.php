@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations\App;
 
+use Asseco\RemoteRelations\App\Collections\RemoteRelationCollection;
+use Asseco\RemoteRelations\RelationsResolver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Asseco\RemoteRelations\App\Collections\RemoteRelationCollection;
-use Asseco\RemoteRelations\RelationsResolver;
 
 class RemoteRelation extends Model
 {
