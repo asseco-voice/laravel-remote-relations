@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Voice\RemoteRelations\App\Collections;
+namespace Asseco\RemoteRelations\App\Collections;
 
+use Asseco\RemoteRelations\RelationsResolver;
 use Illuminate\Database\Eloquent\Collection;
-use Voice\RemoteRelations\RelationsResolver;
 
 class RemoteRelationCollection extends Collection
 {

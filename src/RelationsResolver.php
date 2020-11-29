@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Voice\RemoteRelations;
+namespace Asseco\RemoteRelations;
 
+use Asseco\RemoteRelations\App\Contracts\HasRemoteRelations;
+use Asseco\RemoteRelations\App\Exceptions\RemoteRelationException;
+use Asseco\RemoteRelations\App\RemoteRelation;
 use Illuminate\Database\Eloquent\Collection;
-use Voice\RemoteRelations\App\Contracts\HasRemoteRelations;
-use Voice\RemoteRelations\App\Exceptions\RemoteRelationException;
-use Voice\RemoteRelations\App\RemoteRelation;
 
 class RelationsResolver
 {
