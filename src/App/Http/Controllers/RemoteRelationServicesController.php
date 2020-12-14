@@ -16,6 +16,6 @@ class RemoteRelationServicesController extends Controller
      */
     public function index(): JsonResponse
     {
-        return config('asseco-remote-relations.services');
+        return response()->json(config('asseco-remote-relations.services'));
     }
 }
