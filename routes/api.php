@@ -1,7 +1,7 @@
 <?php
 
 use Asseco\RemoteRelations\App\Http\Controllers\RemoteRelationController;
-use Asseco\RemoteRelations\App\Http\Controllers\RemoteServicesController;
+use Asseco\RemoteRelations\App\Http\Controllers\RemoteRelationServicesController;
 use Asseco\RemoteRelations\App\Http\Controllers\ResolvedRemoteRelationController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('api')
     ->middleware('api')
     ->group(function () {
-        Route::get('services', [RemoteServicesController::class, 'index']);
+        Route::get('remote-relation-services', [RemoteRelationServicesController::class, 'index'])
+            ->name('remote-relation-services.index');
 
-        Route::get('remote-relations/{remote_relation}/resolved',
-            [ResolvedRemoteRelationController::class, 'show'])->name('remote-relations.resolve');
+        Route::get('remote-relations/{remote_relation}/resolved', [ResolvedRemoteRelationController::class, 'show'])
+            ->name('remote-relations.resolve');
 
         Route::apiResource('remote-relations', RemoteRelationController::class);
     });

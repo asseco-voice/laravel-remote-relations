@@ -7,7 +7,7 @@ namespace Asseco\RemoteRelations\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 
-class RemoteServicesController extends Controller
+class RemoteRelationServicesController extends Controller
 {
     /**
      * Display a listing of the resource.
