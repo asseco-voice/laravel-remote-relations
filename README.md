@@ -42,11 +42,24 @@ of users) on a single service so that you can resolve multiple models at once if
 Have your models use a ``Relatable`` trait which will provide an Eloquent relation to 
 a `RemoteRelation` class, so you don't have to repeat yourself. 
 
-There are also two handy methods:
+There are also several handy methods:
 
 - ``relate($service, $model, $id)`` - to create a relation
 - ``relateQuietly($service, $model, $id)`` - to create a relation suppressing all events which 
 would usually be fired by creation of the relation. 
+- ``unrelate($service, $model, $id)`` - to remove a relation
+- ``unrelateQuietly($service, $model, $id)`` - to remove a relation suppressing all events which 
+would usually be fired by creation of the relation. 
+
+## CRUD API
+
+Doing a ``GET`` request on ``api/remote-relation-services`` endpoint will return key-value service mapping
+so frontend can know which services are available.
+
+Standard API resource is published on ``api/remote-relations`` endpoint with standard CRUD routes. 
+
+Additionally, there is a `GET` ``api/remote-relations/{remote_relation}/resolved`` endpoint which will return resolved
+relation.  
 
 ### Example
 
