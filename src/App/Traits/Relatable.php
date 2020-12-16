@@ -44,19 +44,19 @@ trait Relatable
         ]);
     }
 
-    public function unrelate(string $service, string $model, string $id): void
+    public function unrelate(string $service, string $model, string $id, bool $force = false): void
     {
         $relation = $this->relationByServiceModelId($service, $model, $id);
 
-        $relation->delete();
+        $force ? $relation->forceDelete() : $relation->delete();
     }
 
-    public function unrelateQuietly(string $service, string $model, string $id): void
+    public function unrelateQuietly(string $service, string $model, string $id, bool $force = false): void
     {
         $relation = $this->relationByServiceModelId($service, $model, $id);
 
-        static::withoutEvents(function () use ($relation) {
-            return $relation->delete();
+        static::withoutEvents(function () use ($relation, $force) {
+            $force ? $relation->forceDelete() : $relation->delete();
         });
     }
 
