@@ -14,7 +14,7 @@ trait Relatable
         return $this->morphMany(config('asseco-remote-relations.remote_relation_class'), 'model');
     }
 
-    public function relate(string $service, string $model, string $id): Model
+    public function relate(string $service, string $model, $id): Model
     {
         $relation = $this->createRelation($service, $model, $id);
         $relation->save();
@@ -23,7 +23,7 @@ trait Relatable
         return $relation;
     }
 
-    public function relateQuietly(string $service, string $model, string $id): Model
+    public function relateQuietly(string $service, string $model, $id): Model
     {
         $relation = $this->createRelation($service, $model, $id);
         $relation->saveQuietly();
@@ -32,7 +32,7 @@ trait Relatable
         return $relation;
     }
 
-    protected function createRelation(string $service, string $model, string $id): Model
+    protected function createRelation(string $service, string $model, $id): Model
     {
         throw_if(!in_array($service, array_keys(config('asseco-remote-relations.services'))),
             new \Exception("Service $service is not defined"));
@@ -44,14 +44,14 @@ trait Relatable
         ]);
     }
 
-    public function unrelate(string $service, string $model, string $id, bool $force = false): void
+    public function unrelate(string $service, string $model, $id, bool $force = false): void
     {
         $relation = $this->relationByServiceModelId($service, $model, $id);
 
         $force ? $relation->forceDelete() : $relation->delete();
     }
 
-    public function unrelateQuietly(string $service, string $model, string $id, bool $force = false): void
+    public function unrelateQuietly(string $service, string $model, $id, bool $force = false): void
     {
         $relation = $this->relationByServiceModelId($service, $model, $id);
 
@@ -60,7 +60,7 @@ trait Relatable
         });
     }
 
-    protected function relationByServiceModelId(string $service, string $model, string $id)
+    protected function relationByServiceModelId(string $service, string $model, $id)
     {
         return $this->remoteRelations()
             ->where('service', $service)
