@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Asseco\RemoteRelations\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Asseco\RemoteRelations\App\RemoteRelation;
+use Asseco\RemoteRelations\App\Models\RemoteRelation;
 use Illuminate\Http\JsonResponse;
 
 class ResolvedRemoteRelationController extends Controller

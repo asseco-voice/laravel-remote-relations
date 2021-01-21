@@ -1,6 +1,6 @@
 <?php
 
-use Asseco\RemoteRelations\App\RemoteRelation;
+use Asseco\RemoteRelations\App\Models\RemoteRelation;
 
 return [
 

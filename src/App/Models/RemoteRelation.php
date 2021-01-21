@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Asseco\RemoteRelations\App;
+namespace Asseco\RemoteRelations\App\Models;
 
 use Asseco\RemoteRelations\App\Collections\RemoteRelationCollection;
 use Asseco\RemoteRelations\RelationsResolver;

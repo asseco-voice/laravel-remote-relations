@@ -6,7 +6,7 @@ namespace Asseco\RemoteRelations;
 
 use Asseco\RemoteRelations\App\Contracts\HasRemoteRelations;
 use Asseco\RemoteRelations\App\Exceptions\RemoteRelationException;
-use Asseco\RemoteRelations\App\RemoteRelation;
+use Asseco\RemoteRelations\App\Models\RemoteRelation;
 use Illuminate\Database\Eloquent\Collection;
 
 class RelationsResolver
