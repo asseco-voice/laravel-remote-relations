@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations\App\Http\Controllers;
 
+use Asseco\RemoteRelations\App\Http\Requests\RemoteRelationManyRequest;
 use Asseco\RemoteRelations\App\Models\RemoteRelation;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RemoteRelationController extends Controller
 {
@@ -32,6 +34,19 @@ class RemoteRelationController extends Controller
         $remoteRelation = RemoteRelation::query()->create($request->all());
 
         return response()->json($remoteRelation->refresh());
+    }
+
+    public function storeMany(RemoteRelationManyRequest $request)
+    {
+        $relations = $request->validated();
+
+        DB::transaction(function () use ($relations) {
+            foreach ($relations as $relation) {
+                RemoteRelation::query()->create($relation);
+            }
+        });
+
+        return response()->json('success');
     }
 
     /**
