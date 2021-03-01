@@ -25,5 +25,8 @@ Route::prefix('api')
         Route::get('remote-relations/{remote_relation}/resolved', [ResolvedRemoteRelationController::class, 'show'])
             ->name('remote-relations.resolve');
 
+        Route::post('remote-relations/many', [RemoteRelationController::class, 'storeMany'])
+            ->name('remote-relations.store-many');
+
         Route::apiResource('remote-relations', RemoteRelationController::class);
     });
