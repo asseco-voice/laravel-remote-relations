@@ -38,9 +38,9 @@ trait Relatable
             new \Exception("Service $service is not defined"));
 
         return $this->remoteRelations()->make([
-            'service'         => $service,
-            'remote_model'    => $model,
-            'remote_model_id' => $id,
+            'service'           => $service,
+            'remote_model_type' => $model,
+            'remote_model_id'   => $id,
         ]);
     }
 
@@ -64,7 +64,7 @@ trait Relatable
     {
         return $this->remoteRelations()
             ->where('service', $service)
-            ->where('remote_model', $model)
+            ->where('remote_model_type', $model)
             ->where('remote_model_id', $id)
             ->firstOrFail();
     }

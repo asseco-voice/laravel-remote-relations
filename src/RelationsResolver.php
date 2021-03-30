@@ -41,7 +41,7 @@ class RelationsResolver
      */
     public function resolveRelations(Collection $relations): array
     {
-        $relationsByService = $relations->groupBy(['service', 'remote_model']);
+        $relationsByService = $relations->groupBy(['service', 'remote_model_type']);
 
         $resolved = [];
 
