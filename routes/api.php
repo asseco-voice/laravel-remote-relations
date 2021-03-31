@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('api')
     ->middleware('api')
     ->group(function () {
-
         Route::get('remote-relations/{remote_relation}/resolved', [ResolvedRemoteRelationController::class, 'show'])
             ->name('remote-relations.resolve');
 
