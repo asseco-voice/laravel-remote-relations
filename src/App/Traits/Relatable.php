@@ -34,9 +34,6 @@ trait Relatable
 
     protected function createRelation(string $service, string $model, $id): Model
     {
-        throw_if(!in_array($service, array_keys(config('asseco-remote-relations.services'))),
-            new \Exception("Service $service is not defined"));
-
         return $this->remoteRelations()->make([
             'service'           => $service,
             'remote_model_type' => $model,
