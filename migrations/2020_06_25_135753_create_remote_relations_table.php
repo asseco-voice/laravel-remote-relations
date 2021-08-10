@@ -26,7 +26,8 @@ class CreateRemoteRelationsTable extends Migration
             }
 
             $table->string('service');
-            $table->unique(['model_id', 'model_type', 'service', 'remote_model_type', 'remote_model_id']);
+
+            $table->unique(['model_id', 'model_type', 'service', 'remote_model_type', 'remote_model_id'], 'remote_composite_index');
 
             MigrationMethodPicker::pick($table, config('asseco-remote-relations.migrations.timestamps'));
         });
