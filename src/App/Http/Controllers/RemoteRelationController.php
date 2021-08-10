@@ -20,7 +20,7 @@ class RemoteRelationController extends Controller
     {
         $this->remoteRelation = $remoteRelation;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
