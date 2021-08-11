@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations;
 
+use Asseco\RemoteRelations\App\Contracts\RemoteRelation;
 use Illuminate\Support\ServiceProvider;
 
 class RemoteRelationsServiceProvider extends ServiceProvider
@@ -15,6 +16,10 @@ class RemoteRelationsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/asseco-remote-relations.php', 'asseco-remote-relations');
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
+
+        if (config('asseco-remote-relations.migrations.run')) {
+            $this->loadMigrationsFrom(__DIR__ . '/../migrations');
+        }
     }
 
     /**
@@ -22,14 +27,14 @@ class RemoteRelationsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $timestamp = now()->format('Y_m_d_His');
-
         $this->publishes([
-            __DIR__ . config('asseco-remote-relations.stub_path') => database_path("migrations/{$timestamp}_create_remote_relations_table.php"),
-        ], 'asseco-remote-relations-migrations');
+            __DIR__ . '/../migrations' => database_path('migrations'),
+        ], 'asseco-comments');
 
         $this->publishes([
             __DIR__ . '/../config/asseco-remote-relations.php' => config_path('asseco-remote-relations.php'),
         ], 'asseco-remote-relations-config');
+
+        $this->app->bind(RemoteRelation::class, config('asseco-remote-relations.models.remote_relation'));
     }
 }

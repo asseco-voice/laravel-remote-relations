@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations\App\Http\Controllers;
 
+use Asseco\RemoteRelations\App\Contracts\RemoteRelation as RemoteRelationContract;
 use Asseco\RemoteRelations\App\Http\Requests\RemoteRelationManyRequest;
 use Asseco\RemoteRelations\App\Models\RemoteRelation;
 use Exception;
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\DB;
 
 class RemoteRelationController extends Controller
 {
+    public RemoteRelationContract $remoteRelation;
+
+    public function __construct(RemoteRelationContract $remoteRelation)
+    {
+        $this->remoteRelation = $remoteRelation;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +28,7 @@ class RemoteRelationController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(RemoteRelation::all());
+        return response()->json($this->remoteRelation::all());
     }
 
     /**
@@ -31,7 +39,7 @@ class RemoteRelationController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $remoteRelation = RemoteRelation::query()->create($request->all());
+        $remoteRelation = $this->remoteRelation::query()->create($request->all());
 
         return response()->json($remoteRelation->refresh());
     }
@@ -42,7 +50,7 @@ class RemoteRelationController extends Controller
 
         DB::transaction(function () use ($relations) {
             foreach ($relations as $relation) {
-                RemoteRelation::query()->create($relation);
+                $this->remoteRelation::query()->create($relation);
             }
         });
 

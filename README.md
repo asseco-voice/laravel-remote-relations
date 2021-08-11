@@ -13,7 +13,6 @@ as a Laravel service provider, so no additional actions are required.
 
 ## Setup
 
-1. Publish the migrations with ``php artisan vendor:publish --tag=asseco-remote-relations-migrations``
 1. Run ``php artisan migrate`` to migrate the table. 
 
 Table consists of:
@@ -88,3 +87,9 @@ Resolving relations can be done for a single relation, or a collection of relati
 $user->remoteRelations->first()->resolve() // resolves a single relation
 $user->remoteRelations->resolve() // resolves a relation collection
 ```
+
+# Extending the package
+
+Publishing the configuration will enable you to change package models as
+well as controlling how migrations behave. If extending the model, make sure
+you're extending the original model in your implementation.

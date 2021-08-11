@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations\App\Traits;
 
+use Asseco\RemoteRelations\App\Contracts\RemoteRelation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -11,7 +12,7 @@ trait Relatable
 {
     public function remoteRelations(): MorphMany
     {
-        return $this->morphMany(config('asseco-remote-relations.remote_relation_class'), 'model');
+        return $this->morphMany(get_class(app(RemoteRelation::class)), 'model');
     }
 
     public function relate(string $service, string $model, $id): Model
