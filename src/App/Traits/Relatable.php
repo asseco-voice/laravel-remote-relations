@@ -42,7 +42,7 @@ trait Relatable
             'remote_model_id'   => $id,
         ];
 
-        if(config('asseco-remote-relations.migrations.uuid')){
+        if (config('asseco-remote-relations.migrations.uuid')) {
             $attributes['id'] = Str::uuid();
         }
 
