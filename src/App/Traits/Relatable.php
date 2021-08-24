@@ -7,6 +7,7 @@ namespace Asseco\RemoteRelations\App\Traits;
 use Asseco\RemoteRelations\App\Contracts\RemoteRelation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
 
 trait Relatable
 {
@@ -35,11 +36,17 @@ trait Relatable
 
     protected function createRelation(string $service, string $model, $id): Model
     {
-        return $this->remoteRelations()->make([
+        $attributes = [
             'service'           => $service,
             'remote_model_type' => $model,
             'remote_model_id'   => $id,
-        ]);
+        ];
+
+        if(config('asseco-remote-relations.migrations.uuid')){
+            $attributes['id'] = Str::uuid();
+        }
+
+        return $this->remoteRelations()->make($attributes);
     }
 
     public function unrelate(string $service, string $model, $id, bool $force = false): void
