@@ -18,6 +18,11 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function getResolutionAttribute()
+    {
+        return (new RelationsResolver())->resolveRelation($this);
+    }
+
     public function model(): MorphTo
     {
         return $this->morphTo();
