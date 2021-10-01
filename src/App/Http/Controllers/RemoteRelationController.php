@@ -34,7 +34,7 @@ class RemoteRelationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return JsonResponse
      */
     public function store(Request $request): JsonResponse
@@ -60,7 +60,7 @@ class RemoteRelationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param RemoteRelation $remoteRelation
+     * @param  RemoteRelation  $remoteRelation
      * @return JsonResponse
      */
     public function show(RemoteRelation $remoteRelation): JsonResponse
@@ -71,8 +71,8 @@ class RemoteRelationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param RemoteRelation $remoteRelation
+     * @param  Request  $request
+     * @param  RemoteRelation  $remoteRelation
      * @return JsonResponse
      */
     public function update(Request $request, RemoteRelation $remoteRelation): JsonResponse
@@ -85,8 +85,9 @@ class RemoteRelationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param RemoteRelation $remoteRelation
+     * @param  RemoteRelation  $remoteRelation
      * @return JsonResponse
+     *
      * @throws Exception
      */
     public function destroy(RemoteRelation $remoteRelation): JsonResponse
