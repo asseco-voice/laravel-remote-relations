@@ -21,8 +21,9 @@ class RelationsResolver
     /**
      * Resolve single relation.
      *
-     * @param RemoteRelation $relation
+     * @param  RemoteRelation  $relation
      * @return array
+     *
      * @throws RemoteRelationException
      */
     public function resolveRelation(RemoteRelation $relation): array
@@ -35,8 +36,9 @@ class RelationsResolver
     /**
      * Efficiently resolve relation collection grouping it by service/model.
      *
-     * @param Collection $relations
+     * @param  Collection  $relations
      * @return array
+     *
      * @throws RemoteRelationException
      */
     public function resolveRelations(Collection $relations): array
@@ -57,8 +59,9 @@ class RelationsResolver
     }
 
     /**
-     * @param string $serviceClass
+     * @param  string  $serviceClass
      * @return HasRemoteRelations
+     *
      * @throws RemoteRelationException
      */
     protected function instantiateService(string $serviceClass): HasRemoteRelations

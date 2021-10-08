@@ -12,7 +12,7 @@ class ResolvedRemoteRelationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param RemoteRelation $remoteRelation
+     * @param  RemoteRelation  $remoteRelation
      * @return JsonResponse
      */
     public function show(RemoteRelation $remoteRelation): JsonResponse
