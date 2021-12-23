@@ -1,5 +1,6 @@
 <?php
 
+use Asseco\RemoteRelations\App\Http\Controllers\AcknowledgeRemoteRelationController;
 use Asseco\RemoteRelations\App\Http\Controllers\RemoteRelationController;
 use Asseco\RemoteRelations\App\Http\Controllers\ResolvedRemoteRelationController;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,6 @@ Route::prefix('api')
             ->name('remote-relations.store-many');
 
         Route::apiResource('remote-relations', RemoteRelationController::class);
+
+        Route::post('acknowledge-remote-relation', AcknowledgeRemoteRelationController::class);
     });
