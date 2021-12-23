@@ -18,6 +18,10 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'acknowledged' => 'datetime',
+    ];
+
     public function getResolutionAttribute()
     {
         return (new RelationsResolver())->resolveRelation($this);
