@@ -30,6 +30,6 @@ class AcknowledgeRemoteRelationController extends Controller
                 'acknowledged' => now('UTC'),
             ]);
 
-        return response()->isOk();
+        return response()->json('OK', 200);
     }
 }
