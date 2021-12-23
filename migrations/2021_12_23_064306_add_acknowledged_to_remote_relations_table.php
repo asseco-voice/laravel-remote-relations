@@ -15,7 +15,6 @@ class AddAcknowledgedToRemoteRelationsTable extends Migration
     {
         Schema::table('remote_relations', function (Blueprint $table) {
             $table->date('acknowledged')->nullable();
-
         });
     }
 
