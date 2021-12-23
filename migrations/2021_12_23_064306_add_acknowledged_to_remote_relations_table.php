@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AddAcknowledgedToRemoteRelationsTable extends Migration
@@ -16,6 +17,11 @@ class AddAcknowledgedToRemoteRelationsTable extends Migration
         Schema::table('remote_relations', function (Blueprint $table) {
             $table->dateTime('acknowledged')->after('service')->nullable();
         });
+
+        // Assume current data is acknowledged
+        DB::table('remote_relations')->update([
+            'acknowledged' => now(),
+        ]);
     }
 
     /**
