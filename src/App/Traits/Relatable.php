@@ -16,30 +16,31 @@ trait Relatable
         return $this->morphMany(get_class(app(RemoteRelation::class)), 'model');
     }
 
-    public function relate(string $service, string $model, $id): Model
+    public function relate(string $service, string $model, $id, bool $acknowledged = false): Model
     {
-        $relation = $this->createRelation($service, $model, $id);
+        $relation = $this->createRelation($service, $model, $id, $acknowledged);
         $relation->save();
         $relation->refresh();
 
         return $relation;
     }
 
-    public function relateQuietly(string $service, string $model, $id): Model
+    public function relateQuietly(string $service, string $model, $id, bool $acknowledged = false): Model
     {
-        $relation = $this->createRelation($service, $model, $id);
+        $relation = $this->createRelation($service, $model, $id, $acknowledged);
         $relation->saveQuietly();
         $relation->refresh();
 
         return $relation;
     }
 
-    protected function createRelation(string $service, string $model, $id): Model
+    protected function createRelation(string $service, string $model, $id, bool $acknowledged): Model
     {
         $attributes = [
             'service'           => $service,
             'remote_model_type' => $model,
             'remote_model_id'   => $id,
+            'acknowledged'      => $acknowledged ? now('UTC') : null,
         ];
 
         if (config('asseco-remote-relations.migrations.uuid')) {

@@ -22,6 +22,7 @@ Table consists of:
 1. Remote model - plain string representing a model in a remote service (isn't Laravel
 specific)
 1. Remote model ID - actual ID to which a relation is created 
+1. Acknowledged - date to verify if reverse relation was created
 
 Out of the box no services are registered because the package doesn't know
 where to fetch related data from, so you need to provide services manually. 
@@ -52,21 +53,35 @@ would usually be fired by creation of the relation.
 
 ## CRUD API
 
-Doing a ``GET`` request on ``api/remote-relation-services`` endpoint will return key-value service mapping
-so frontend can know which services are available.
-
 Standard API resource is published on ``api/remote-relations`` endpoint with standard CRUD routes. 
 
-Additionally, there is a `GET` ``api/remote-relations/{remote_relation}/resolved`` endpoint which will return resolved
-relation.  
+Going on ``api/remote-relations/many``, you can execute a POST request to store many relations at once.
+
+Additionally, there is a `GET` ``api/remote-relations/{remote_relation}/resolved`` endpoint which will return a resolved relation.  
+
+## Acknowledgement
+
+Initially when you create a remote relation from service A to service B, acknowledged
+attribute is ``null``. When service B catches the event and creates the relation in its
+database, it should set the acknowledged attribute of a newly created row to `true` and
+communicate back to service A to set acknowledged attribute of original relation 
+to ``now()``.
+
+## Resolving relations programmatically
+
+You will probably want to have a class which knows how to resolve particular relations. To do that, have your SDK class implement a ``HasRemoteRelations`` interface and implement methods from it.
+
+Once you do that, register that class in ``services.php`` under
+``sdk`` key. Service name must be the name which you are storing
+in the DB when populating the ``service`` attribute.
 
 ### Example
 
-Given the following configuration:
+Given the following configuration in ``services.php``:
 
 ```
-'services' => [
-    'some_remote_service' => SomeRemoteService::class,
+'some_remote_service' => [
+    'sdk' => SomeRemoteService::class,
 ],
 ``` 
 

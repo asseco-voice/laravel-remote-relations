@@ -8,16 +8,10 @@ use Asseco\RemoteRelations\App\Contracts\HasRemoteRelations;
 use Asseco\RemoteRelations\App\Exceptions\RemoteRelationException;
 use Asseco\RemoteRelations\App\Models\RemoteRelation;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 
 class RelationsResolver
 {
-    protected array $services = [];
-
-    public function __construct()
-    {
-        $this->services = config('asseco-remote-relations.services');
-    }
-
     /**
      * Resolve single relation.
      *
@@ -66,10 +60,12 @@ class RelationsResolver
      */
     protected function instantiateService(string $serviceClass): HasRemoteRelations
     {
-        if (!array_key_exists($serviceClass, $this->services)) {
+        $service = Arr::get(config('services'), "$serviceClass.sdk");
+
+        if (!$service) {
             throw new RemoteRelationException("Service '$serviceClass' is not registered");
         }
 
-        return new $this->services[$serviceClass];
+        return new $service;
     }
 }
