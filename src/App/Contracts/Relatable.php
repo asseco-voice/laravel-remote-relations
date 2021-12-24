@@ -9,9 +9,9 @@ interface Relatable
 {
     public function remoteRelations(): MorphMany;
 
-    public function relate(string $service, string $model, $id): Model;
+    public function relate(string $service, string $model, $id, bool $acknowledged = false): Model;
 
-    public function relateQuietly(string $service, string $model, $id): Model;
+    public function relateQuietly(string $service, string $model, $id, bool $acknowledged = false): Model;
 
     public function unrelate(string $service, string $model, $id, bool $force = false): void;
 
