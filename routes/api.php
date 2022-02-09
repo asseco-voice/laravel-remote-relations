@@ -2,7 +2,7 @@
 
 use Asseco\RemoteRelations\App\Http\Controllers\AcknowledgeRemoteRelationController;
 use Asseco\RemoteRelations\App\Http\Controllers\RemoteRelationController;
-use Asseco\RemoteRelations\App\Http\Controllers\ResolvedRemoteRelationController;
+use Asseco\RemoteRelations\App\Http\Controllers\ResolveRemoteRelationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('api')
     ->middleware('api')
     ->group(function () {
-        Route::get('remote-relations/{remote_relation}/resolved', [ResolvedRemoteRelationController::class, 'show'])
+        Route::get('remote-relations/{remote_relation}/resolve', ResolveRemoteRelationController::class)
             ->name('remote-relations.resolve');
 
         Route::post('remote-relations/many', [RemoteRelationController::class, 'storeMany'])

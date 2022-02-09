@@ -7,7 +7,7 @@ namespace Asseco\RemoteRelations\App\Http\Controllers;
 use Asseco\RemoteRelations\App\Models\RemoteRelation;
 use Illuminate\Http\JsonResponse;
 
-class ResolvedRemoteRelationController extends Controller
+class ResolveRemoteRelationController extends Controller
 {
     /**
      * Display the specified resource.
@@ -15,7 +15,7 @@ class ResolvedRemoteRelationController extends Controller
      * @param  RemoteRelation  $remoteRelation
      * @return JsonResponse
      */
-    public function show(RemoteRelation $remoteRelation): JsonResponse
+    public function __invoke(RemoteRelation $remoteRelation): JsonResponse
     {
         return response()->json($remoteRelation->resolve()[RemoteRelation::DATA_KEY]);
     }
