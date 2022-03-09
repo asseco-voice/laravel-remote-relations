@@ -13,9 +13,9 @@ class RemoteRelationCollection extends Collection
     protected const RESOLUTION = 'resolution';
 
     /**
-     * Overriding Laravel append method to support batching HTTP calls to external services
+     * Overriding Laravel append method to support batching HTTP calls to external services.
      *
-     * @param array|string $attributes
+     * @param  array|string  $attributes
      * @return RemoteRelationCollection
      */
     public function append($attributes)
@@ -52,7 +52,6 @@ class RemoteRelationCollection extends Collection
         $resolvedRelations = (new RelationsResolver())->resolveRelations($this);
 
         $this->each(function ($remoteRelation) use ($resolvedRelations) {
-
             $data = array_filter($resolvedRelations, function ($resolvedRelation) use ($remoteRelation) {
                 return $resolvedRelation['id'] == $remoteRelation->remote_model_id;
             });
