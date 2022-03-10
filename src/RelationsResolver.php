@@ -9,6 +9,7 @@ use Asseco\RemoteRelations\App\Exceptions\RemoteRelationException;
 use Asseco\RemoteRelations\App\Models\RemoteRelation;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Facade;
 
 class RelationsResolver
 {
@@ -66,6 +67,13 @@ class RelationsResolver
             throw new RemoteRelationException("Service '$serviceClass' is not registered");
         }
 
-        return new $service;
+        $instance = new $service;
+
+        return $this->isFacade($instance) ? $instance::getFacadeRoot() : $instance;
+    }
+
+    protected function isFacade(object $service): bool
+    {
+        return $service instanceof Facade;
     }
 }
