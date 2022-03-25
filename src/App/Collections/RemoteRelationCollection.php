@@ -20,13 +20,13 @@ class RemoteRelationCollection extends Collection
      */
     public function append($attributes)
     {
-        if ($this->resolutionInString($attributes)) {
+        if (is_string($attributes) && $this->resolutionInString($attributes)) {
             $this->batchResolutions();
 
             return $this;
         }
 
-        if ($this->resolutionInArray($attributes)) {
+        if (is_array($attributes) && $this->resolutionInArray($attributes)) {
             $this->batchResolutions();
 
             if (($key = array_search(self::RESOLUTION, $attributes)) !== false) {
@@ -39,12 +39,12 @@ class RemoteRelationCollection extends Collection
 
     protected function resolutionInString(string $attributes): bool
     {
-        return is_string($attributes) && $attributes == self::RESOLUTION;
+        return $attributes == self::RESOLUTION;
     }
 
-    protected function resolutionInArray(string $attributes): bool
+    protected function resolutionInArray(array $attributes): bool
     {
-        return is_array($attributes) && in_array(self::RESOLUTION, $attributes);
+        return in_array(self::RESOLUTION, $attributes);
     }
 
     protected function batchResolutions(): void
