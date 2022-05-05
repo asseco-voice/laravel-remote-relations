@@ -2,6 +2,7 @@
 
 use Asseco\BlueprintAudit\App\MigrationMethodPicker;
 use Asseco\RemoteRelations\App\Models\RemoteRelation;
+use Asseco\RemoteRelations\RelationsResolver;
 
 return [
 
@@ -9,7 +10,8 @@ return [
      * Model bindings.
      */
     'models' => [
-        'remote_relation' => RemoteRelation::class,
+        'remote_relation'    => RemoteRelation::class,
+        'relations_resolver' => RelationsResolver::class
     ],
 
     'migrations' => [
