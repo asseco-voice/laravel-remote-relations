@@ -11,7 +11,7 @@ return [
      */
     'models' => [
         'remote_relation'    => RemoteRelation::class,
-        'relations_resolver' => RelationsResolver::class
+        'relations_resolver' => RelationsResolver::class,
     ],
 
     'migrations' => [
