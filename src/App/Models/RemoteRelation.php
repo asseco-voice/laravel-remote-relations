@@ -34,8 +34,6 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
 
     public function resolve()
     {
-        $resolver =
-
         $resolvedRelation = (app(RelationsResolver::class))->resolveRelation($this);
 
         return array_merge($this->toArray(), [self::DATA_KEY => $resolvedRelation]);
