@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Asseco\RemoteRelations\App\Models;
 
 use Asseco\RemoteRelations\App\Collections\RemoteRelationCollection;
+use Asseco\RemoteRelations\App\Contracts\RelationsResolver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -23,9 +24,7 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
 
     public function getResolutionAttribute()
     {
-        $resolverClass = config('asseco-remote-relations.models.relations_resolver');
-
-        return (new $resolverClass())->resolveRelation($this);
+        return (app(RelationsResolver::class))->resolveRelation($this);
     }
 
     public function model(): MorphTo
@@ -35,9 +34,9 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
 
     public function resolve()
     {
-        $resolverClass = config('asseco-remote-relations.models.relations_resolver');
+        $resolver =
 
-        $resolvedRelation = (new $resolverClass())->resolveRelation($this);
+        $resolvedRelation = (app(RelationsResolver::class))->resolveRelation($this);
 
         return array_merge($this->toArray(), [self::DATA_KEY => $resolvedRelation]);
     }

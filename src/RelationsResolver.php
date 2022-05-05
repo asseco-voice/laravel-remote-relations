@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Facade;
 
-class RelationsResolver
+class RelationsResolver implements \Asseco\RemoteRelations\App\Contracts\RelationsResolver
 {
     /**
      * Resolve single relation.
