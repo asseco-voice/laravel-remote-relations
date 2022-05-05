@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Facade;
 
-class RelationsResolver
+class RelationsResolver implements \Asseco\RemoteRelations\App\Contracts\RelationsResolver
 {
     /**
      * Resolve single relation.
@@ -61,13 +61,17 @@ class RelationsResolver
      */
     protected function instantiateService(string $serviceClass): HasRemoteRelations
     {
-        $service = Arr::get(config('services'), "$serviceClass.sdk");
+        $service = Arr::get(config('services'), "$serviceClass.sdk") ?: $this->externalServiceSearch($serviceClass);
 
         if (!$service) {
             throw new RemoteRelationException("Service '$serviceClass' is not registered");
         }
 
-        $instance = new $service;
+        if (is_object($service)) {
+            $instance = $service;
+        } else {
+            $instance = new $service;
+        }
 
         return $this->isFacade($instance) ? $instance::getFacadeRoot() : $instance;
     }
@@ -75,5 +79,10 @@ class RelationsResolver
     protected function isFacade(object $service): bool
     {
         return $service instanceof Facade;
+    }
+
+    protected function externalServiceSearch(string $serviceClass)
+    {
+        return null;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations;
 
+use Asseco\RemoteRelations\App\Contracts\RelationsResolver;
 use Asseco\RemoteRelations\App\Contracts\RemoteRelation;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -37,6 +38,7 @@ class RemoteRelationsServiceProvider extends ServiceProvider
         ], 'asseco-remote-relations-config');
 
         $this->app->bind(RemoteRelation::class, config('asseco-remote-relations.models.remote_relation'));
+        $this->app->bind(RelationsResolver::class, config('asseco-remote-relations.models.relations_resolver'));
 
         Route::model('remote_relation', get_class(app(RemoteRelation::class)));
     }
