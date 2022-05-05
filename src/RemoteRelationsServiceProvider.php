@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations;
 
-use Asseco\RemoteRelations\App\Contracts\RemoteRelation;
 use Asseco\RemoteRelations\App\Contracts\RelationsResolver;
+use Asseco\RemoteRelations\App\Contracts\RemoteRelation;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
