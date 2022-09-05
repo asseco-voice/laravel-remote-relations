@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('api')
-    ->middleware('api')
+Route::prefix(config('asseco-remote-relations.routes.prefix'))
+    ->middleware(config('asseco-remote-relations.routes.middleware'))
     ->group(function () {
         Route::get('remote-relations/{remote_relation}/resolve', ResolveRemoteRelationController::class)
             ->name('remote-relations.resolve');
