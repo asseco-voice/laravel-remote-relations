@@ -1,6 +1,7 @@
 <?php
 
 use Asseco\BlueprintAudit\App\MigrationMethodPicker;
+use Asseco\RemoteRelations\App\Events\RemoteRelationCreated;
 use Asseco\RemoteRelations\App\Models\RemoteRelation;
 use Asseco\RemoteRelations\RelationsResolver;
 
@@ -12,6 +13,10 @@ return [
     'models' => [
         'remote_relation'    => RemoteRelation::class,
         'relations_resolver' => RelationsResolver::class,
+    ],
+
+    'events' => [
+        'remote_relation_created' => RemoteRelationCreated::class
     ],
 
     'migrations' => [
