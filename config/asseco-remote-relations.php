@@ -16,7 +16,7 @@ return [
     ],
 
     'events' => [
-        'remote_relation_created' => RemoteRelationCreated::class
+        'remote_relation_created' => RemoteRelationCreated::class,
     ],
 
     'migrations' => [
