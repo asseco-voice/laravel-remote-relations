@@ -22,6 +22,13 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
         'acknowledged' => 'datetime',
     ];
 
+    protected static function booted()
+    {
+        static::created(function (self $remoteRelation) {
+            config('asseco-remote-relations.events.remote_relation_created')::dispatch($remoteRelation);
+        });
+    }
+
     public function getResolutionAttribute()
     {
         return (app(RelationsResolver::class))->resolveRelation($this);
