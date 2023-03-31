@@ -33,6 +33,7 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
             if ($remoteRelation->exists()) {
                 Log::info("Remote relation already exists and won't be saved: "
                     . print_r($remoteRelation->toArray(), true));
+
                 return false;
             }
         });
@@ -40,7 +41,7 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
 
     public function getResolutionAttribute()
     {
-        return (app(RelationsResolver::class))->resolveRelation($this);
+        return app(RelationsResolver::class)->resolveRelation($this);
     }
 
     public function model(): MorphTo
@@ -50,7 +51,7 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
 
     public function resolve()
     {
-        $resolvedRelation = (app(RelationsResolver::class))->resolveRelation($this);
+        $resolvedRelation = app(RelationsResolver::class)->resolveRelation($this);
 
         return array_merge($this->toArray(), [self::DATA_KEY => $resolvedRelation]);
     }
