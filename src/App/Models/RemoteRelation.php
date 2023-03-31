@@ -64,12 +64,12 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
     protected function exists(): bool
     {
         return $this->isDirty([
-                'model_id',
-                'model_type',
-                'service',
-                'remote_model_type',
-                'remote_model_id'
-            ]) && config('asseco-remote-relations.models.remote_relation')::query()
+            'model_id',
+            'model_type',
+            'service',
+            'remote_model_type',
+            'remote_model_id',
+        ]) && config('asseco-remote-relations.models.remote_relation')::query()
                 ->where('model_id', $this->model_id)
                 ->where('model_type', $this->model_type)
                 ->where('service', $this->service)
