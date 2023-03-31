@@ -9,6 +9,7 @@ use Asseco\RemoteRelations\App\Contracts\RelationsResolver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Log;
 
 class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contracts\RemoteRelation
 {
@@ -26,6 +27,14 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
     {
         static::created(function (self $remoteRelation) {
             config('asseco-remote-relations.events.remote_relation_created')::dispatch($remoteRelation);
+        });
+
+        static::saving(function (self $remoteRelation) {
+            if ($remoteRelation->exists()) {
+                Log::info("Remote relation already exists and won't be saved: "
+                    . print_r($remoteRelation->toArray(), true));
+                return false;
+            }
         });
     }
 
@@ -49,5 +58,16 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
     public function newCollection(array $models = [])
     {
         return new RemoteRelationCollection($models);
+    }
+
+    protected function exists(): bool
+    {
+        return config('asseco-remote-relations.models.remote_relation')::query()
+            ->where('model_id', $this->model_id)
+            ->where('model_type', $this->model_type)
+            ->where('service', $this->service)
+            ->where('remote_model_type', $this->remote_model_type)
+            ->where('remote_model_id', $this->remote_model_id)
+            ->exists();
     }
 }
