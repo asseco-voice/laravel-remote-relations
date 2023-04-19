@@ -39,7 +39,7 @@ class RemoteRelationCollection extends Collection
 
     protected function batchResolutions(): void
     {
-        $resolvedRelations = (app(RelationsResolver::class))->resolveRelations($this);
+        $resolvedRelations = app(RelationsResolver::class)->resolveRelations($this);
 
         $this->each(function ($remoteRelation) use ($resolvedRelations) {
             $data = array_filter($resolvedRelations, function ($resolvedRelation) use ($remoteRelation) {
@@ -52,7 +52,7 @@ class RemoteRelationCollection extends Collection
 
     public function resolve()
     {
-        $resolvedRelations = (app(RelationsResolver::class))->resolveRelations($this);
+        $resolvedRelations = app(RelationsResolver::class)->resolveRelations($this);
 
         return array_map(function ($resolvedRelation) {
             $originalRelationObject = $this->where('remote_model_id', $resolvedRelation['id'])->first();
