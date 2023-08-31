@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('remote_relations', function (Blueprint $table) {
-            if (config('asseco-custom-fields.migrations.uuid')) {
+            if (config('asseco-remote-relations.migrations.uuid')) {
                 $table->foreignUuid('remote_relation_type_id')->nullable()->constrained()->cascadeOnDelete();
             } else {
                 $table->foreignId('remote_relation_type_id')->nullable()->constrained()->cascadeOnDelete();
