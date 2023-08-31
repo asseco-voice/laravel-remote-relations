@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations\App\Models;
 
-use Asseco\RemoteRelations\App\Contracts\RemoteRelationType;
 use Asseco\RemoteRelations\App\Collections\RemoteRelationCollection;
 use Asseco\RemoteRelations\App\Contracts\RelationsResolver;
+use Asseco\RemoteRelations\App\Contracts\RemoteRelationType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

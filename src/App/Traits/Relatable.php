@@ -41,7 +41,7 @@ trait Relatable
             'remote_model_type'       => $model,
             'remote_model_id'         => $id,
             'acknowledged'            => $acknowledged ? now('UTC') : null,
-            'remote_relation_type_id' => $typeId
+            'remote_relation_type_id' => $typeId,
         ];
 
         if (config('asseco-remote-relations.migrations.uuid')) {

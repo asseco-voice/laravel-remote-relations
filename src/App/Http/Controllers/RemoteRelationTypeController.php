@@ -44,7 +44,7 @@ class RemoteRelationTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param RemoteRelationType $remoteRelationType
+     * @param  RemoteRelationType  $remoteRelationType
      * @return JsonResponse
      */
     public function show(RemoteRelationType $remoteRelationType): JsonResponse
@@ -55,8 +55,8 @@ class RemoteRelationTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param RemoteRelationType $remoteRelationType
+     * @param  Request  $request
+     * @param  RemoteRelationType  $remoteRelationType
      * @return JsonResponse
      */
     public function update(Request $request, RemoteRelationType $remoteRelationType): JsonResponse
@@ -69,9 +69,8 @@ class RemoteRelationTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param RemoteRelationType $remoteRelationType
+     * @param  RemoteRelationType  $remoteRelationType
      * @return JsonResponse
-     *
      */
     public function destroy(RemoteRelationType $remoteRelationType): JsonResponse
     {
