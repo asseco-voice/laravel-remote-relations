@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Asseco\RemoteRelations\App\Models;
 
+use Asseco\RemoteRelations\App\Contracts\RemoteRelationType;
 use Asseco\RemoteRelations\App\Collections\RemoteRelationCollection;
 use Asseco\RemoteRelations\App\Contracts\RelationsResolver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contracts\RemoteRelation
@@ -37,6 +39,11 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
     public function model(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function remoteRelationType(): BelongsTo
+    {
+        return $this->belongsTo(get_class(app(RemoteRelationType::class)));
     }
 
     public function resolve()
