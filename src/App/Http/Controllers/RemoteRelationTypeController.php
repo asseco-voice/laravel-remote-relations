@@ -31,7 +31,7 @@ class RemoteRelationTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param RemoteRelationTypeRequest $request
+     * @param  RemoteRelationTypeRequest  $request
      * @return JsonResponse
      */
     public function store(RemoteRelationTypeRequest $request): JsonResponse
@@ -55,8 +55,8 @@ class RemoteRelationTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param RemoteRelationTypeRequest $request
-     * @param RemoteRelationType $remoteRelationType
+     * @param  RemoteRelationTypeRequest  $request
+     * @param  RemoteRelationType  $remoteRelationType
      * @return JsonResponse
      */
     public function update(RemoteRelationTypeRequest $request, RemoteRelationType $remoteRelationType): JsonResponse
