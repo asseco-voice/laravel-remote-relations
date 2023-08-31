@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Asseco\RemoteRelations\App\Http\Controllers;
 
 use Asseco\RemoteRelations\App\Contracts\RemoteRelationType as RemoteRelationTypeContract;
+use Asseco\RemoteRelations\App\Http\Requests\RemoteRelationTypeRequest;
 use Asseco\RemoteRelations\App\Models\RemoteRelationType;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class RemoteRelationTypeController extends Controller
 {
@@ -31,10 +31,10 @@ class RemoteRelationTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param RemoteRelationTypeRequest $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(RemoteRelationTypeRequest $request): JsonResponse
     {
         $remoteRelationType = $this->remoteRelationType::query()->create($request->all());
 
@@ -55,11 +55,11 @@ class RemoteRelationTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  RemoteRelationType  $remoteRelationType
+     * @param RemoteRelationTypeRequest $request
+     * @param RemoteRelationType $remoteRelationType
      * @return JsonResponse
      */
-    public function update(Request $request, RemoteRelationType $remoteRelationType): JsonResponse
+    public function update(RemoteRelationTypeRequest $request, RemoteRelationType $remoteRelationType): JsonResponse
     {
         $remoteRelationType->update($request->all());
 
