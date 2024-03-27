@@ -21,14 +21,27 @@ class AcknowledgeRemoteRelationController extends Controller
         $service = $request->get('service');
         $model = $request->get('model');
         $id = $request->get('id');
+        $remoteId = $request->get('remote_id');
 
-        $this->remoteRelation->query()
-            ->where('service', $service)
-            ->where('remote_model_type', $model)
-            ->where('remote_model_id', $id)
-            ->update([
-                'acknowledged' => now('UTC'),
-            ]);
+        if (!empty($remoteId)) {
+            $this->remoteRelation->query()
+                ->where('service', $service)
+                ->where('model_id', $remoteId)
+                ->where('remote_model_type', $model)
+                ->where('remote_model_id', $id)
+                ->update([
+                    'acknowledged' => now('UTC'),
+                ]);
+        }
+        else {
+            $this->remoteRelation->query()
+                ->where('service', $service)
+                ->where('remote_model_type', $model)
+                ->where('remote_model_id', $id)
+                ->update([
+                    'acknowledged' => now('UTC'),
+                ]);
+        }
 
         return response()->json('OK', 200);
     }

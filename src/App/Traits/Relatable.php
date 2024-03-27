@@ -71,6 +71,7 @@ trait Relatable
     {
         return $this->remoteRelations()
             ->where('service', $service)
+            ->where('model_id', $this->id)
             ->where('remote_model_type', $model)
             ->where('remote_model_id', $id)
             ->firstOrFail();

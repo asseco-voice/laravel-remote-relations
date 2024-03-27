@@ -24,9 +24,10 @@ class AcknowledgeRemoteRelationRequest extends FormRequest
     public function rules()
     {
         return [
-            'service' => 'required|string',
-            'model'   => 'required|string',
-            'id'      => 'required',
+            'service'   => 'required|string',
+            'model'     => 'required|string',
+            'id'        => 'required',
+            'remote_id' => 'nullable|string'
         ];
     }
 }
