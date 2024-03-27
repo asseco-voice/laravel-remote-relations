@@ -25,8 +25,9 @@ class AcknowledgeRemoteRelationRequest extends FormRequest
     {
         return [
             'service' => 'required|string',
-            'model'   => 'required|string',
-            'id'      => 'required',
+            'model' => 'required|string',
+            'id' => 'required',
+            'remote_id' => 'nullable|string',
         ];
     }
 }

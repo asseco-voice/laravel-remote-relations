@@ -37,10 +37,10 @@ trait Relatable
     protected function createRelation(string $service, string $model, $id, bool $acknowledged, $typeId = null): Model
     {
         $attributes = [
-            'service'                 => $service,
-            'remote_model_type'       => $model,
-            'remote_model_id'         => $id,
-            'acknowledged'            => $acknowledged ? now('UTC') : null,
+            'service' => $service,
+            'remote_model_type' => $model,
+            'remote_model_id' => $id,
+            'acknowledged' => $acknowledged ? now('UTC') : null,
             'remote_relation_type_id' => $typeId,
         ];
 
@@ -71,6 +71,7 @@ trait Relatable
     {
         return $this->remoteRelations()
             ->where('service', $service)
+            ->where('model_id', $this->id)
             ->where('remote_model_type', $model)
             ->where('remote_model_id', $id)
             ->firstOrFail();

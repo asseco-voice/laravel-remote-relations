@@ -30,15 +30,15 @@ class RemoteRelationTypeRequest extends FormRequest
         $name = $this->name;
 
         return [
-            'name'          => [
+            'name' => [
                 'required',
                 'string',
                 Rule::unique('remote_relation_types')->ignore($this->$type)->where(function ($query) {
                     return $this->usesSoftDelete() ? $query->whereNull('deleted_at') : $query;
                 }),
             ],
-            'label'         => 'required|string',
-            'inverse_name'  => 'required|string',
+            'label' => 'required|string',
+            'inverse_name' => 'required|string',
             'inverse_label' => 'required|string',
         ];
     }
