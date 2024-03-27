@@ -12,9 +12,9 @@ return [
      * Model bindings.
      */
     'models' => [
-        'remote_relation'      => RemoteRelation::class,
+        'remote_relation' => RemoteRelation::class,
         'remote_relation_type' => RemoteRelationType::class,
-        'relations_resolver'   => RelationsResolver::class,
+        'relations_resolver' => RelationsResolver::class,
     ],
 
     'events' => [
@@ -26,7 +26,7 @@ return [
         /**
          * UUIDs as primary keys.
          */
-        'uuid'       => false,
+        'uuid' => false,
 
         /**
          * Timestamp types.
@@ -39,11 +39,11 @@ return [
          * Should the package run the migrations. Set to false if you're publishing
          * and changing default migrations.
          */
-        'run'        => true,
+        'run' => true,
     ],
 
     'routes' => [
-        'prefix'     => 'api',
+        'prefix' => 'api',
         'middleware' => ['api'],
     ],
 ];

@@ -32,8 +32,7 @@ class AcknowledgeRemoteRelationController extends Controller
                 ->update([
                     'acknowledged' => now('UTC'),
                 ]);
-        }
-        else {
+        } else {
             $this->remoteRelation->query()
                 ->where('service', $service)
                 ->where('remote_model_type', $model)
