@@ -25,7 +25,7 @@ class RemoteRelationTypeController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json($this->remoteRelationType::all());
+        return response()->json($this->remoteRelationType::query()->where('is_system', false)->get());
     }
 
     /**
