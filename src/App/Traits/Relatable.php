@@ -16,32 +16,55 @@ trait Relatable
         return $this->morphMany(get_class(app(RemoteRelation::class)), 'model');
     }
 
-    public function relate(string $service, string $model, $id, bool $acknowledged = false, $typeId = null): Model
-    {
-        $relation = $this->createRelation($service, $model, $id, $acknowledged, $typeId);
+    public function relate(
+        string $service,
+        string $model,
+        $id,
+        bool $acknowledged = false,
+        $typeId = null,
+        ?string $validFrom = null,
+        ?string $validTo = null,
+    ): Model {
+        $relation = $this->createRelation($service, $model, $id, $acknowledged, $typeId, $validFrom, $validTo);
         $relation->save();
         $relation->refresh();
 
         return $relation;
     }
 
-    public function relateQuietly(string $service, string $model, $id, bool $acknowledged = false, $typeId = null): Model
-    {
-        $relation = $this->createRelation($service, $model, $id, $acknowledged, $typeId);
+    public function relateQuietly(
+        string $service,
+        string $model,
+        $id,
+        bool $acknowledged = false,
+        $typeId = null,
+        ?string $validFrom = null,
+        ?string $validTo = null,
+    ): Model {
+        $relation = $this->createRelation($service, $model, $id, $acknowledged, $typeId, $validFrom, $validTo);
         $relation->saveQuietly();
         $relation->refresh();
 
         return $relation;
     }
 
-    protected function createRelation(string $service, string $model, $id, bool $acknowledged, $typeId = null): Model
-    {
+    protected function createRelation(
+        string $service,
+        string $model,
+        $id,
+        bool $acknowledged,
+        $typeId = null,
+        ?string $validFrom = null,
+        ?string $validTo = null,
+    ): Model {
         $attributes = [
             'service' => $service,
             'remote_model_type' => $model,
             'remote_model_id' => $id,
             'acknowledged' => $acknowledged ? now('UTC') : null,
             'remote_relation_type_id' => $typeId,
+            'valid_from' => $validFrom,
+            'valid_to' => $validTo,
         ];
 
         if (config('asseco-remote-relations.migrations.uuid')) {

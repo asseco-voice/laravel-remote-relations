@@ -7,6 +7,7 @@ namespace Asseco\RemoteRelations\App\Models;
 use Asseco\RemoteRelations\App\Collections\RemoteRelationCollection;
 use Asseco\RemoteRelations\App\Contracts\RelationsResolver;
 use Asseco\RemoteRelations\App\Contracts\RemoteRelationType;
+use Asseco\RemoteRelations\App\Scopes\ActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +23,8 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
 
     protected $casts = [
         'acknowledged' => 'datetime',
+        'valid_from' => 'date',
+        'valid_to' => 'date',
     ];
 
     protected static function booted()
@@ -29,6 +32,8 @@ class RemoteRelation extends Model implements \Asseco\RemoteRelations\App\Contra
         static::created(function (self $remoteRelation) {
             config('asseco-remote-relations.events.remote_relation_created')::dispatch($remoteRelation);
         });
+
+        static::addGlobalScope(new ActiveScope);
     }
 
     public function getResolutionAttribute()
