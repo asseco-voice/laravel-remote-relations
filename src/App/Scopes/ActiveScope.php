@@ -16,10 +16,10 @@ class ActiveScope implements Scope
 
         $builder
             ->where(function (Builder $q) use ($date) {
-                $q->whereNull('valid_from')->orWhereDate('valid_from', '<=', $date);
+                $q->whereNull('valid_from')->orWhere('valid_from', '<=', $date);
             })
             ->where(function (Builder $q) use ($date) {
-                $q->whereNull('valid_to')->orWhereDate('valid_to', '>=', $date);
+                $q->whereNull('valid_to')->orWhere('valid_to', '>=', $date);
             });
     }
 }
